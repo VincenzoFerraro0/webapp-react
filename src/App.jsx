@@ -1,10 +1,19 @@
-import Header from "./section/Header"
+import { Route, BrowserRouter, Routes } from "react-router-dom";
+import DefaultLayout from "./layouts/DeafultLayout";
+import HomePage from "./pages/HomePage";
+import MoviePage from "./pages/MoviePage";
+
 function App() {
 
   return (
-    <>
-    {/* <Header /> */}
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route Component={DefaultLayout} >
+          <Route path="/" Component={HomePage}/>
+          <Route path="/movies/:id" Component={MoviePage}/>
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 
