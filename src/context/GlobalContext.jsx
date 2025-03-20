@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { createContext, useContext, useEffect, useState } from 'react';
 
+
 // Creazione del contesto globale
 const GlobalContext = createContext();
 
@@ -13,25 +14,34 @@ const GlobalProvider = ({ children }) => {
     // Stato per memorizzare il film selezionato
     const [selectedMovie, setSelectedMovie] = useState(null);
 
+    const [ isLoading, setIsLoading ] = useState(false) 
+
 
     // Funzione per recuperare tutti i film 
     const fetchMovies = () => {
+        setIsLoading(true)
         axios
             .get(`${url}/movies`)
             .then((res) => setMovies(res.data)) // Aggiorna lo stato con i dati ricevuti
-            .catch((error) => console.log('Errore nel recupero dei film:', error));
+            .catch((error) => console.log('Errore nel recupero dei film:', error))
+            .then( () => setIsLoading(false) );
     };
 
     // Funzione per recuperare un singolo film tramite ID
     const fetchMovie = (id) => {
+
+        setIsLoading(true)
         axios
             .get(`${url}/movies/${id}`)
             .then((res) => setSelectedMovie(res.data)) // Aggiorna lo stato con il film selezionato
-            .catch((error) => console.log('Errore nel recupero del film:', error));
+            .catch((error) => console.log('Errore nel recupero del film:', error))
+            then( () => setIsLoading(false) );
     };
 
     // Effettua il recupero iniziale dei film al caricamento del componente
     useEffect(fetchMovies, []);
+
+
 
     // Valore del contesto globale che verrà fornito ai componenti figli
     const value = {
@@ -39,6 +49,8 @@ const GlobalProvider = ({ children }) => {
         fetchMovies,  // Funzione per aggiornare i film
         selectedMovie, // Film selezionato
         fetchMovie,   // Funzione per recuperare un singolo film
+        isLoading,
+  
     };
 
     return (
