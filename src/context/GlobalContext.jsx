@@ -13,7 +13,8 @@ const GlobalProvider = ({ children }) => {
     // Stato per memorizzare il film selezionato
     const [selectedMovie, setSelectedMovie] = useState(null);
 
-    // Funzione per recuperare tutti i film dall'API
+
+    // Funzione per recuperare tutti i film 
     const fetchMovies = () => {
         axios
             .get(`${url}/movies`)
