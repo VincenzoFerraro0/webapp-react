@@ -2,6 +2,7 @@ import { Route, BrowserRouter, Routes } from "react-router-dom";
 import DefaultLayout from "./layouts/DeafultLayout";
 import { GlobalProvider } from "./context/GlobalContext"
 
+
 // PAGES 
 import HomePage from "./pages/HomePage";
 import MoviePage from "./pages/MoviePage";
@@ -9,6 +10,8 @@ import AboutUsPage from "./pages/AbautUsPage";
 import CreateMoviePage from "./pages/CreateMoviePage";
 
 function App() {
+
+
 
   return (
     <GlobalProvider>

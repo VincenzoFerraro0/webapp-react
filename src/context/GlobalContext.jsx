@@ -30,12 +30,12 @@ const GlobalProvider = ({ children }) => {
     // Funzione per recuperare un singolo film tramite ID
     const fetchMovie = (id) => {
 
-        setIsLoading(true)
+        
         axios
             .get(`${url}/movies/${id}`)
             .then((res) => setSelectedMovie(res.data)) // Aggiorna lo stato con il film selezionato
             .catch((error) => console.log('Errore nel recupero del film:', error))
-            then( () => setIsLoading(false) );
+            
     };
 
     // Effettua il recupero iniziale dei film al caricamento del componente

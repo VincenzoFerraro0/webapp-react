@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useGlobalContext } from '../context/GlobalContext';
 import ReviewCard from '../components/ReviewCard';
 import ReviewForm from '../components/ReviewForm';
+import StarRating from '../components/StarRating';
 
 export default function MoviePage() {
   // Ottiene l'ID del film dai parametri dell'URL
@@ -43,14 +44,20 @@ export default function MoviePage() {
             {/* Sezione delle recensioni */}
             <section className="mb-12">
               <h4 className="text-xl font-semibold mb-6 text-gray-800">Our community reviews</h4>
-              <div  className="space-y-4" >
+              <div className="space-y-4" >
+                <h5>Media recensioni</h5>
+                <div className='flex items-center justify-center gap-3'>
+                  {selectedMovie?.reviews && <StarRating vote={selectedMovie.average_vote} />}
+                  <span className="text-gray-700 text-md font-medium">{selectedMovie.average_vote}/5</span>
+                </div>
+
                 {renderReviews()}
               </div>
             </section>
 
             {/* //form review */}
             <section className="mb-12">
-            <h4 className="text-xl font-semibold mb-6 text-gray-800">Lascia una recensione</h4>
+              <h4 className="text-xl font-semibold mb-6 text-gray-800">Lascia una recensione</h4>
               {selectedMovie?.id && <ReviewForm movie_id={selectedMovie.id} reloadReviews={fetchMovie} />}
             </section>
           </div>
